@@ -177,9 +177,65 @@
   }
 
   /* ---------- About / spec block ---------- */
+  .about-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .photo-frame {
+    position: relative;
+    border: 1px solid var(--line);
+  }
+  .photo-frame::before, .photo-frame::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+  }
+  .photo-frame::before {
+    top: -1px; left: -1px;
+    border-top: 2px solid var(--accent);
+    border-left: 2px solid var(--accent);
+  }
+  .photo-frame::after {
+    bottom: -1px; right: -1px;
+    border-bottom: 2px solid var(--accent);
+    border-right: 2px solid var(--accent);
+  }
+  .photo-frame .photo-inner {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-elev);
+  }
+  .photo-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: grayscale(1) contrast(1.08) brightness(0.94);
+  }
+  .photo-frame .photo-inner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    mix-blend-mode: color;
+    opacity: 0.22;
+    pointer-events: none;
+  }
+  .photo-caption {
+    margin: 10px 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+
   .spec {
     display: grid;
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 150px 1fr;
     gap: 32px;
   }
   .spec dl { display: contents; }
@@ -356,6 +412,8 @@
   }
 
   @media (max-width: 640px) {
+    .about-layout { grid-template-columns: 1fr; }
+    .photo-frame { max-width: 200px; }
     .spec { grid-template-columns: 1fr; }
     .spec dt { border-top: none; padding-bottom: 4px; }
     .spec dd { padding-top: 0; margin-bottom: 4px; }
@@ -398,18 +456,28 @@
   <section id="sobre" class="wrap">
     <h2>Sobre</h2>
     <p class="section-title">Foco atual e forma de trabalhar</p>
-    <div class="spec">
-      <div class="row">
-        <dt>Formação</dt>
-        <dd>Ciência da Computação, com ênfase prática em desenvolvimento backend.</dd>
+    <div class="about-layout">
+      <div>
+        <div class="photo-frame">
+          <div class="photo-inner">
+            <img src="assets/felipe.jpg" alt="Retrato de Felipe Lopes" width="720" height="960" />
+          </div>
+        </div>
+        <p class="photo-caption">Felipe Lopes</p>
       </div>
-      <div class="row">
-        <dt>Foco atual</dt>
-        <dd>Arquiteturas de microsserviços e aplicação de modelos de linguagem (LLMs) em cenários práticos de negócio.</dd>
-      </div>
-      <div class="row">
-        <dt>Abordagem</dt>
-        <dd>Ciclo completo de desenvolvimento — da concepção da API até interfaces que resolvem problemas reais dos usuários.</dd>
+      <div class="spec">
+        <div class="row">
+          <dt>Formação</dt>
+          <dd>Ciência da Computação, com ênfase prática em desenvolvimento backend.</dd>
+        </div>
+        <div class="row">
+          <dt>Foco atual</dt>
+          <dd>Arquiteturas de microsserviços e aplicação de modelos de linguagem (LLMs) em cenários práticos de negócio.</dd>
+        </div>
+        <div class="row">
+          <dt>Abordagem</dt>
+          <dd>Ciclo completo de desenvolvimento — da concepção da API até interfaces que resolvem problemas reais dos usuários.</dd>
+        </div>
       </div>
     </div>
   </section>
